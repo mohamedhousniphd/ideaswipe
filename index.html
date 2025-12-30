@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>IdeaSwipe</title>
+    <meta name="description" content="Swipe on startup ideas" />
+    <meta name="theme-color" content="#ffffff" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          extend: {
+            colors: {
+              background: 'var(--background)',
+              foreground: 'var(--foreground)',
+              card: 'var(--card)',
+              'card-foreground': 'var(--card-foreground)',
+              popover: 'var(--popover)',
+              'popover-foreground': 'var(--popover-foreground)',
+              primary: 'var(--primary)',
+              'primary-foreground': 'var(--primary-foreground)',
+              secondary: 'var(--secondary)',
+              'secondary-foreground': 'var(--secondary-foreground)',
+              muted: 'var(--muted)',
+              'muted-foreground': 'var(--muted-foreground)',
+              accent: 'var(--accent)',
+              'accent-foreground': 'var(--accent-foreground)',
+              destructive: 'var(--destructive)',
+              'destructive-foreground': 'var(--destructive-foreground)',
+              border: 'var(--border)',
+              input: 'var(--input)',
+              ring: 'var(--ring)',
+            },
+            fontFamily: {
+              sans: ['var(--font-sans)', 'sans-serif'],
+              mono: ['var(--font-mono)', 'monospace'],
+            },
+            borderRadius: {
+              lg: 'var(--radius)',
+              md: 'calc(var(--radius) - 2px)',
+              sm: 'calc(var(--radius) - 4px)',
+            },
+          },
+        },
+      }
+    </script>
+    <style>
+      /* CSS Variables from Prompt */
+      :root {
+        --background: oklch(0.9789 0.0082 121.6272);
+        --foreground: oklch(0 0 0);
+        --card: oklch(1.0000 0 0);
+        --card-foreground: oklch(0 0 0);
+        --popover: oklch(1.0000 0 0);
+        --popover-foreground: oklch(0 0 0);
+        --primary: oklch(0.5106 0.2301 276.9656);
+        --primary-foreground: oklch(1.0000 0 0);
+        --secondary: oklch(0.7038 0.1230 182.5025);
+        --secondary-foreground: oklch(1.0000 0 0);
+        --muted: oklch(0.9551 0 0);
+        --muted-foreground: oklch(0.3211 0 0);
+        --accent: oklch(0.7686 0.1647 70.0804);
+        --accent-foreground: oklch(0 0 0);
+        --destructive: oklch(0.6368 0.2078 25.3313);
+        --destructive-foreground: oklch(1.0000 0 0);
+        --border: oklch(0 0 0);
+        --input: oklch(0.5555 0 0);
+        --ring: oklch(0.7853 0.1041 274.7134);
+        --chart-1: oklch(0.5106 0.2301 276.9656);
+        --chart-2: oklch(0.7038 0.1230 182.5025);
+        --chart-3: oklch(0.7686 0.1647 70.0804);
+        --chart-4: oklch(0.6559 0.2118 354.3084);
+        --chart-5: oklch(0.7227 0.1920 149.5793);
+        --sidebar: oklch(0.9789 0.0082 121.6272);
+        --sidebar-foreground: oklch(0 0 0);
+        --sidebar-primary: oklch(0.5106 0.2301 276.9656);
+        --sidebar-primary-foreground: oklch(1.0000 0 0);
+        --sidebar-accent: oklch(0.7686 0.1647 70.0804);
+        --sidebar-accent-foreground: oklch(0 0 0);
+        --sidebar-border: oklch(0 0 0);
+        --sidebar-ring: oklch(0.7853 0.1041 274.7134);
+        --font-sans: 'DM Sans', sans-serif;
+        --font-serif: 'DM Sans', sans-serif;
+        --font-mono: 'Space Mono', monospace;
+        --radius: 1rem;
+        --tracking-normal: normal;
+      }
+
+      .dark {
+        --background: oklch(0 0 0);
+        --foreground: oklch(1.0000 0 0);
+        --card: oklch(0.2455 0.0217 257.2823);
+        --card-foreground: oklch(1.0000 0 0);
+        --popover: oklch(0.2455 0.0217 257.2823);
+        --popover-foreground: oklch(1.0000 0 0);
+        --primary: oklch(0.6801 0.1583 276.9349);
+        --primary-foreground: oklch(0 0 0);
+        --secondary: oklch(0.7845 0.1325 181.9120);
+        --secondary-foreground: oklch(0 0 0);
+        --muted: oklch(0.3211 0 0);
+        --muted-foreground: oklch(0.8452 0 0);
+        --accent: oklch(0.8790 0.1534 91.6054);
+        --accent-foreground: oklch(0 0 0);
+        --destructive: oklch(0.7106 0.1661 22.2162);
+        --destructive-foreground: oklch(0 0 0);
+        --border: oklch(0.4459 0 0);
+        --input: oklch(1.0000 0 0);
+        --ring: oklch(0.6801 0.1583 276.9349);
+        --chart-1: oklch(0.6801 0.1583 276.9349);
+        --chart-2: oklch(0.7845 0.1325 181.9120);
+        --chart-3: oklch(0.8790 0.1534 91.6054);
+        --chart-4: oklch(0.7253 0.1752 349.7607);
+        --chart-5: oklch(0.8003 0.1821 151.7110);
+        --sidebar: oklch(0 0 0);
+        --sidebar-foreground: oklch(1.0000 0 0);
+        --sidebar-primary: oklch(0.6801 0.1583 276.9349);
+        --sidebar-primary-foreground: oklch(0 0 0);
+        --sidebar-accent: oklch(0.8790 0.1534 91.6054);
+        --sidebar-accent-foreground: oklch(0 0 0);
+        --sidebar-border: oklch(1.0000 0 0);
+        --sidebar-ring: oklch(0.6801 0.1583 276.9349);
+      }
+
+      body {
+        background-color: var(--background);
+        color: var(--foreground);
+        font-family: var(--font-sans);
+        letter-spacing: var(--tracking-normal);
+        -webkit-font-smoothing: antialiased;
+        overflow-x: hidden;
+      }
+
+      /* Hide scrollbar for clean UI */
+      ::-webkit-scrollbar {
+        width: 0px;
+        background: transparent;
+      }
+    </style>
+  <script type="importmap">
+{
+  "imports": {
+    "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
+    "react/": "https://esm.sh/react@^19.2.3/",
+    "react": "https://esm.sh/react@^19.2.3",
+    "@playwright/test": "https://esm.sh/@playwright/test@^1.57.0"
+  }
+}
+</script>
+<link rel="stylesheet" href="/index.css">
+</head>
+  <body>
+    <div id="root"></div>
+  <script type="module" src="/index.tsx"></script>
+</body>
+</html>
