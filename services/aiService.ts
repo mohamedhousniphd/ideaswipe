@@ -14,7 +14,7 @@ export const aiService = {
     if (!apiKey) {
       console.warn("No OpenRouter API Key set. Using mock reviewer.");
       await new Promise(resolve => setTimeout(resolve, 1500)); // Simulate latency
-      
+
       // Simple mock validation logic
       const isTooShort = text.length < 60;
       const isTooLong = text.length > 120;
@@ -23,7 +23,7 @@ export const aiService = {
 
       if (isTooShort || isTooLong) return { approved: false, reason: "Length requirement not met." };
       if (hasUrl || hasEmail) return { approved: false, reason: "Contains links or personal info." };
-      
+
       return { approved: true };
     }
 
@@ -33,7 +33,7 @@ export const aiService = {
         headers: {
           "Authorization": `Bearer ${apiKey}`,
           "Content-Type": "application/json",
-          "HTTP-Referer": window.location.origin, 
+          "HTTP-Referer": window.location.origin,
           "X-Title": "IdeaSwipe"
         },
         body: JSON.stringify({
@@ -63,7 +63,7 @@ export const aiService = {
 
       const data = await response.json();
       const content = data.choices[0]?.message?.content;
-      
+
       try {
         const result = JSON.parse(content);
         return {
@@ -75,8 +75,9 @@ export const aiService = {
       }
 
     } catch (error) {
-      console.error("AI Review Error:", error);
-      return { approved: false, reason: "Service unavailable." };
+      console.warn("AI Review Error (falling back to approval):", error);
+      // Fallback: Approve by default if AI service fails (to not block users during demo/dev)
+      return { approved: true, reason: "AI Service unavailable, auto-approved." };
     }
   }
 };

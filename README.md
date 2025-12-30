@@ -102,6 +102,21 @@ npm run build
 **Output Directory:**
 `dist/`
 
+### Docker Deployment
+The application can be containerized using the provided `Dockerfile`.
+
+**Build Image:**
+```bash
+docker build -t ideaswipe .
+```
+
+**Run Container:**
+```bash
+docker run -d -p 8080:80 --name ideaswipe-app ideaswipe
+```
+Access at `http://localhost:8080`.
+
+
 ---
 
 ## 7. Security Considerations

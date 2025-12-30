@@ -1,4 +1,5 @@
 import { Idea, IdeaStatus, Interaction, User, UserRole, AppConfig } from '../types';
+import { generateId } from '../utils';
 
 const STORAGE_KEYS = {
   USERS: 'ideaswipe_users',
@@ -17,21 +18,21 @@ const DEFAULT_CONFIG: AppConfig = {
 const seedData = () => {
   const users = JSON.parse(localStorage.getItem(STORAGE_KEYS.USERS) || '[]');
   const adminEmail = 'admin@ideaswipe.com';
-  
+
   // Ensure Admin exists
   if (!users.find((u: User) => u.email === adminEmail)) {
-    const adminUser: User = { 
-      id: 'admin-1', 
-      name: 'Super Admin', 
+    const adminUser: User = {
+      id: 'admin-1',
+      name: 'Super Admin',
       email: adminEmail,
-      password: 'password123', 
-      role: UserRole.ADMIN, 
-      createdAt: Date.now() 
+      password: 'password123',
+      role: UserRole.ADMIN,
+      createdAt: Date.now()
     };
     users.push(adminUser);
     localStorage.setItem(STORAGE_KEYS.USERS, JSON.stringify(users));
   }
-  
+
   if (!localStorage.getItem(STORAGE_KEYS.IDEAS)) {
     const ideas: Idea[] = [
       {
@@ -93,20 +94,20 @@ export const storageService = {
 
   signup: (name: string, email: string, password: string): User => {
     const users = JSON.parse(localStorage.getItem(STORAGE_KEYS.USERS) || '[]');
-    
+
     if (users.find((u: User) => u.email.toLowerCase() === email.toLowerCase())) {
       throw new Error("Email already exists");
     }
 
     const newUser: User = {
-      id: crypto.randomUUID(),
+      id: generateId(),
       name,
       email,
       password,
       role: UserRole.USER,
       createdAt: Date.now()
     };
-    
+
     users.push(newUser);
     localStorage.setItem(STORAGE_KEYS.USERS, JSON.stringify(users));
     localStorage.setItem(STORAGE_KEYS.CURRENT_USER_ID, newUser.id);
